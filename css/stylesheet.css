@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'pix PixelFJVerdana12pt';
+    src: url('pixPixelFJVerdana12pt.eot');
+    src: url('pixPixelFJVerdana12pt.eot?#iefix') format('embedded-opentype'),
+        url('pixPixelFJVerdana12pt.woff2') format('woff2'),
+        url('pixPixelFJVerdana12pt.woff') format('woff'),
+        url('pixPixelFJVerdana12pt.ttf') format('truetype'),
+        url('pixPixelFJVerdana12pt.svg#pixPixelFJVerdana12pt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
