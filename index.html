@@ -197,10 +197,29 @@ window.addEventListener('load', (event) => {
   console.log('page is fully loaded');
   console.log(tg.ready(),tg.isExpanded) // метод позволяет отследить, когда приложение готово к отображению.
   if(!tg.isExpanded)tg.expand()
-  tg.expand()// метод позволяет растянуть окно на всю высоту.
+//  tg.expand()// метод позволяет растянуть окно на всю высоту.
 });
 
 // tg.close() // метод закрывает приложение.
+
+tg.MainButton.text = 'Attack!' // текст кнопки, по умолчанию: "Continue"
+// tg.MainButton.color // цвет текста
+// tg.MainButton.textColor // цвет подложки
+// tg.MainButton.isVisible // видна ли кнопка (по умолчанию false) 
+tg.MainButton.isActive // активна ли кнопка (по умолчанию true)
+tg.MainButton.setText("Danger is near..") //  метод для задания текста
+tg.MainButton.onClick(testingMainButton) // метод при нажатии на кнопку
+tg.MainButton.enable() // сделать активной
+tg.MainButton.show() // показать кнопку
+// tg.MainButton.hide() // скрыть кнопку
+
+// tg.MainButton.disable() // сделать неактивной
+// tg.MainButton.setParams(params) // задает параметры в виде объекта
+
+var testingMainButton = () => {
+  console.log("Oh yeahhh")
+}
+
       </script>
   </body>
 </html>
