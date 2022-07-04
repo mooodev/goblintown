@@ -1,31 +1,326 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style media="screen">
-      body{
-        font-size: 4vw;
-        color:#008106;
-        background-color:#1f1f1f;
-      }
-      .mainHolder{
-        overflow:scroll;
-      }
-    </style>
-  </head>
-  <body>
-    <button type="button" onclick="testingMainButton()" name="button">test</button>
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<style>
+@import url(http://dev.amazingsoftworks.com/vgafont/styles.css);
 
-      <h1 id="mainHeaderPanel">Miner 0.0.1</h1>
-      <div class="mainHolder">
-      <p id="mainInfoPanel">c:/_</p>
+html, body {
+	padding: 0;
+	margin: 0;
+font-size: 4vw;
+}
+
+body {
+	font-family: "PerfectDOSVGA437", monospace;
+	font-weight: normal;
+	-webkit-font-smoothing: none;
+	font-size: 16px;
+	background-color: black;
+}
+
+.screen {
+	padding: 0;
+	border-bottom: 2px solid black;
+	border-top: 2px solid black;
+}
+
+.screen:first-child {
+	border-top: none;
+}
+
+.win {
+	text-align: center;
+	max-width: 80%;
+	min-width: 300px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 2vw;
+}
+
+.win p:first-child {
+	margin-top: 0;
+}
+
+.win p:last-child {
+	margin-bottom: 0;
+}
+
+.content-center {
+	text-align: center;
+}
+
+.symantec {
+	background-color: #555555;
+}
+
+.symantec header.main {
+	position: relative;
+	height: 4em;
+}
+
+.symantec header.main:before {
+	content: ' ';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2em;
+	background-color: #5356fc;
+}
+
+.symantec header.main .caption {
+	display: inline-block;
+	padding: 1px 4px;
+	position: absolute;
+	top: 1.5em;
+	right: 2em;
+	color: white;
+	background: black;
+	text-transform: uppercase;
+}
+
+.symantec .win {
+	position: relative;
+	margin: 50px auto;
+	border: 2px solid white;
+	padding: 25px 50px;
+	color: white;
+	background-color: #5356fc;
+	box-shadow: 20px 20px 0 0 rgba(0, 0, 0, 0.8);
+}
+
+.symantec .win:first-of-type {
+	margin-top: 25px;
+}
+
+.symantec .win a {
+	color: #7dff8a;
+}
+
+.symantec .win .caption {
+	margin-bottom: 15px;
+}
+
+.symantec .win .caption .title {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: inline-block;
+	background: white;
+	padding: 2px 0;
+	color: black;
+	text-align: center;
+}
+
+.symantec .win .caption .title:before {
+	content: ' ';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 19px;
+	height: 19px;
+	background: black;
+}
+
+.symantec .win .caption .title:after {
+	content: '-';
+	position: absolute;
+	left: 5px;
+	top: -1px;
+	font-size: 24px;
+	color: white;
+}
+
+.symantec strong {
+	color: #fcff55;
+	font-weight: normal;
+}
+
+.norton {
+	background-color: #333333;
+	height: 100vh;
+}
+
+.norton .win {
+	position: relative;
+	margin: 50px auto;
+	padding: 50px 60px;
+	box-shadow: 20px 20px 0 0 rgba(0, 0, 0, 0.8);
+}
+
+.norton .win:before, .norton .win:after {
+	content: ' ';
+	position: absolute;
+	border: 1px solid #2efffe;
+	z-index: 1;
+}
+
+.norton .win:before {
+	top: 20px;
+	bottom: 20px;
+	left: 20px;
+	right: 20px;
+}
+
+.norton .win:after {
+	top: 22px;
+	bottom: 22px;
+	left: 22px;
+	right: 22px;
+}
+
+.norton .win .caption {
+	position: absolute;
+	top: 14px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 2;
+}
+
+.norton .win .caption .title {
+	display: inline-block;
+	padding-left: 0.8em;
+	padding-right: 0.6em;
+}
+
+.norton .win strong {
+	font-weight: normal;
+}
+
+.norton .win.blue-theme {
+	color: #2efffe;
+	background-color: #180099;
+}
+
+.norton .win.blue-theme:before, .norton .win.blue-theme:after {
+	border-color: #2efffe;
+}
+
+.norton .win.blue-theme .caption .title {
+	background-color: #180099;
+}
+
+.norton .win.blue-theme a {
+	color: #fcff2f;
+}
+
+.norton .win.blue-theme strong {
+	color: #fcff55;
+}
+
+.norton .win.gray-theme {
+	color: #000000;
+	background-color: #afa8af;
+}
+
+.norton .win.gray-theme:before, .norton .win.gray-theme:after {
+	border-color: #000000;
+}
+
+.norton .win.gray-theme .caption .title {
+	background-color: #afa8af;
+}
+
+.norton .win.gray-theme a {
+	color: #fcff2f;
+}
+
+.norton .win.gray-theme strong {
+	background-color: #1ca8af;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
+}
+
+.norton .win.cyan-theme {
+	color: #ffffff;
+	background-color: #1ca8af;
+}
+
+.norton .win.cyan-theme:before, .norton .win.cyan-theme:after {
+	border-color: #ffffff;
+}
+
+.norton .win.cyan-theme .caption .title {
+	background-color: #1ca8af;
+}
+
+.norton .win.cyan-theme a {
+	color: #fcff2f;
+}
+
+.norton .win.cyan-theme strong {
+	background-color: #000000;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
+}
+
+	</style>
+</head>
+
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js"></script>
+<!-- <div class="screen symantec">
+
+  <div class="win blue-theme" >
+    <div class="caption"><div class="title">TR+ TERMINAL</div></div>
+    <div id="normal">
+      <p class="content-center"><strong>Account</strong></p>
+      <p id="balance">Balance:</p>
+
+
     </div>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
-    <script type="text/javascript">
-      console.log("Hello world")
+  </div>
+
+	<div class="win blue-theme">
+    <div class="caption"><div class="title">Norton Commander CSS Theme</div></div>
+    <div>
+      <p class="content-center"><strong>Blue Window</strong></p>
+      <p>This theme design mimics from MS-DOS shell Noton Commander.</p>
+    </div>
+  </div>
+
+
+
+</div> -->
+
+
+<div class="screen norton">
+ <button type="button" onclick="testingMainButton()" name="button">test</button>
+  <div class="win blue-theme">
+    <div class="caption"><div class="title">Miner Accont Commander:</div></div>
+    <div>
+      <p class="content-center"><strong>Balance</strong></p>
+      <p>This account is empty , fill it up from from MS-DOS shell Noton Commander.</p>
+    </div>
+  </div>
+
+  <div class="win gray-theme">
+    <div class="caption"><div class="title">Cryptography solving terminal workstation</div></div>
+    <div>
+      <p class="content-center"><strong id="mainHeaderPanel">Waiting</strong></p>
+			  <div id="mainInfoPanel">
+    </div>
+		</div>
+  </div>
+
+  <!-- <div class="win cyan-theme">
+    <div class="caption"><div class="title">Norton Commander CSS Theme</div></div>
+    <div>
+      <p class="content-center"><strong>Cyan Window</strong></p>
+      <p>This theme design mimics <a href="http://en.wikipedia.org/wiki/Text-based_user_interface">Text-based user interface</a> from MS-DOS shell Noton Commander.</p>
+    </div>
+  </div> -->
+</div>
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
+	<script type="text/javascript">
+		console.log("Hello world")
 let tg = window.Telegram.WebApp;
 
 
@@ -33,30 +328,30 @@ let tg = window.Telegram.WebApp;
 
 //g.initData //получаем данные от пользователя в виде строки (работает только при запуске из меню команд бота).
 //tg.initDataUnsafe // получаем данные от пользователя в виде объекта (работает только при запуске из меню команд бота).
- // возвращает true, если приложение открыто на всю высоту, false - если нет.
+// возвращает true, если приложение открыто на всю высоту, false - если нет.
 console.log(tg.viewportHeight) // вернёт ширину окна.
 //tg.sendData("Hello") // отправляет данные  боту в строковом виде, после чего закрывает приложение (работает только если приложение запущено с keyboard button).
 
 
 window.addEventListener('load', (event) => {
-  console.log('page is fully loaded');
-  _isClickPossible = true;
-  tg.expand()
-  // tg.close() // метод закрывает приложение.
+console.log('page is fully loaded');
+_isClickPossible = true;
+tg.expand()
+// tg.close() // метод закрывает приложение.
 
-  tg.MainButton.text = 'Its Hack-time!' // текст кнопки, по умолчанию: "Continue"
-  // tg.MainButton.color // цвет текста
-  // tg.MainButton.textColor // цвет подложки
-  // tg.MainButton.isVisible // видна ли кнопка (по умолчанию false)
-  tg.MainButton.isActive // активна ли кнопка (по умолчанию true)
+tg.MainButton.text = 'Its Hack-time!' // текст кнопки, по умолчанию: "Continue"
+// tg.MainButton.color // цвет текста
+// tg.MainButton.textColor // цвет подложки
+// tg.MainButton.isVisible // видна ли кнопка (по умолчанию false)
+tg.MainButton.isActive // активна ли кнопка (по умолчанию true)
 
-  tg.MainButton.onClick(testingMainButton) // метод при нажатии на кнопку
-  tg.MainButton.enable() // сделать активной
-  tg.MainButton.show() // показать кнопку
-  // tg.MainButton.hide() // скрыть кнопку
+tg.MainButton.onClick(testingMainButton) // метод при нажатии на кнопку
+tg.MainButton.enable() // сделать активной
+tg.MainButton.show() // показать кнопку
+// tg.MainButton.hide() // скрыть кнопку
 
-  // tg.MainButton.disable() // сделать неактивной
-  // tg.MainButton.setParams(params) // задает параметры в виде объекта
+// tg.MainButton.disable() // сделать неактивной
+// tg.MainButton.setParams(params) // задает параметры в виде объекта
 
 //  tg.expand()// метод позволяет растянуть окно на всю высоту.
 });
@@ -64,94 +359,94 @@ window.addEventListener('load', (event) => {
 
 
 class Miner{
-  constructor(){
-    this.speed = 1000;
-    //startup miner
-    this.timer = 1000;
-    this.powered = false;
-    this.nonce = 0;
-    this.currentString = '';
-    this.userId = 'user';
-  }
-  powerOn(){
-    this.powered = true;
-    tg.MainButton.setText("Mining...")
-    chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///Mining in action!", 10)
-    this.nonce = 0;
-  }
-  powerOff(){
-    this.powered = false;
-    tg.MainButton.setText("Start")
-    chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///standby mode...", 10)
-  }
-  mineLoop(delta){
-    if(this.powered){
-      this.timer -= delta;
-      if(this.timer < 0){
-        this.timer = this.speed;
-        this.hashingProcess()
-      }
-    }
-  }
-  hashingProcess(){
-    this.currentString = world.currentSituation.toString()
-    let _nonceString = this.currentString + this.nonce + this.userId.toString();
-    this.nonce++;
-    let hash;
-    hash = CryptoJS.SHA256(_nonceString.toString());
-    hash = hash.toString(CryptoJS.enc.Hex)
-    addNewTypeInfoParagraph(hash)
-    if(world.checkForReward(hash)){
-      //mined a block event!
-      addNewTypeInfoParagraph("REWARD RECIVED ---->")
-      this.powerOff()
-    }
-  }
+constructor(){
+	this.speed = 1000;
+	//startup miner
+	this.timer = 1000;
+	this.powered = false;
+	this.nonce = 0;
+	this.currentString = '';
+	this.userId = 'user';
+}
+powerOn(){
+	this.powered = true;
+	tg.MainButton.setText("Mining...")
+	chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///Mining in action!", 10)
+	this.nonce = 0;
+}
+powerOff(){
+	this.powered = false;
+	tg.MainButton.setText("Start")
+	chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///standby mode...", 10)
+}
+mineLoop(delta){
+	if(this.powered){
+		this.timer -= delta;
+		if(this.timer < 0){
+			this.timer = this.speed;
+			this.hashingProcess()
+		}
+	}
+}
+hashingProcess(){
+	this.currentString = world.currentSituation.toString()
+	let _nonceString = this.currentString + this.nonce + this.userId.toString();
+	this.nonce++;
+	let hash;
+	hash = CryptoJS.SHA256(_nonceString.toString());
+	hash = hash.toString(CryptoJS.enc.Hex)
+	addNewTypeInfoParagraph(hash)
+	if(world.checkForReward(hash)){
+		//mined a block event!
+		addNewTypeInfoParagraph("REWARD RECIVED ---->")
+		this.powerOff()
+	}
+}
 }
 
 
 class World{
-  constructor(){
-    this.difficulty = 1;
-    this.currentSituation = Math.random()
-  }
-  checkForReward(hash){
+constructor(){
+	this.difficulty = 1;
+	this.currentSituation = Math.random()
+}
+checkForReward(hash){
 let difficultyJackpot = 0;
 for(let n = 0; n < this.difficulty ; n++){
-  if(Number(hash.charAt(n)) == n){
-    difficultyJackpot++;
-  }
+if(Number(hash.charAt(n)) == n){
+	difficultyJackpot++;
 }
-    if(difficultyJackpot == this.difficulty){
-      //solved! Recive reward please
-      this.currentSituation = Math.random()
-      return true;
-    }else{
-      return false;
-    }
-  }
+}
+	if(difficultyJackpot == this.difficulty){
+		//solved! Recive reward please
+		this.currentSituation = Math.random()
+		return true;
+	}else{
+		return false;
+	}
+}
 }
 
 
 let addNewTypeInfoParagraph = (text) => {
-  let newElement = document.createElement("p");
-  document.getElementById("mainInfoPanel").prepend(newElement)
-  chatboxModule.addTypewriter(newElement,text, 15)
+let newElement = document.createElement("p");
+document.getElementById("mainInfoPanel").prepend(newElement)
+chatboxModule.addTypewriter(newElement,text, 15)
 }
 
 
 const world = new World();
 const myNewMiner = new Miner();
-myNewMiner.speed = 2500;
+myNewMiner.speed = 150;
 
 
 
 var testingMainButton = () => {
-  if(!myNewMiner.powered){
-    myNewMiner.powerOn();
-  }else{
-    console.log("not yet ready")
-  }
+if(!myNewMiner.powered){
+	myNewMiner.powerOn();
+}else{
+	console.log("not yet ready")
+}
 }
 
 
@@ -159,69 +454,69 @@ var testingMainButton = () => {
 
 
 class TypewritersMax {
-    constructor() {
-        this.typewritersArray = [];
-        this.targetsArray = [];
-    }
-    addTypewriter(target, text, speed) {
-      target.innerText = '';
-      if(target.style.opacity == '' || target.style.opacity == '0'){
-        target.style.opacity =  1;
-      }
-        let newtypewriter = new CommonTypewriter(speed, text)
-        this.targetsArray.push(target);
-        this.typewritersArray.push(newtypewriter);
-        return true;
-    }
-    deleteTypewriter(target) {
-      this.targetsArray.splice(target, 1);
-      this.typewritersArray.splice(target, 1);
-      return true;
-    }
-    executeTypingAcrossAllArrays(delta){
-        if (this.targetsArray.length == 0) return;
-        for (let t = 0; t < this.typewritersArray.length; t++) {
-            let talkbox = this.typewritersArray[t]
-            if (talkbox.type(delta)) {
-                this.targetsArray[t].innerText = talkbox.currentText;
-                if (talkbox.dead) {
-                  this.deleteTypewriter(t)
-                }
-            }
-        }
-        return true;
-    }
+	constructor() {
+			this.typewritersArray = [];
+			this.targetsArray = [];
+	}
+	addTypewriter(target, text, speed) {
+		target.innerText = '';
+		if(target.style.opacity == '' || target.style.opacity == '0'){
+			target.style.opacity =  1;
+		}
+			let newtypewriter = new CommonTypewriter(speed, text)
+			this.targetsArray.push(target);
+			this.typewritersArray.push(newtypewriter);
+			return true;
+	}
+	deleteTypewriter(target) {
+		this.targetsArray.splice(target, 1);
+		this.typewritersArray.splice(target, 1);
+		return true;
+	}
+	executeTypingAcrossAllArrays(delta){
+			if (this.targetsArray.length == 0) return;
+			for (let t = 0; t < this.typewritersArray.length; t++) {
+					let talkbox = this.typewritersArray[t]
+					if (talkbox.type(delta)) {
+							this.targetsArray[t].innerText = talkbox.currentText;
+							if (talkbox.dead) {
+								this.deleteTypewriter(t)
+							}
+					}
+			}
+			return true;
+	}
 }
 
 class CommonTypewriter {
-    constructor(speed, final) {
-        this.currentText = '';
-        this.finalText = final;
-        this.currentTimer = 200;
-        this.speed = speed;
-        this.dead = false;
-    }
-    addNextLetter() {
-        //and check if writing is done
-        if (this.currentText == this.finalText) {
-            //console.log("Writing is done!")
-            this.dead = true;
-        } else {
-            //adding one letter
-            this.currentText = this.finalText.slice(0, this.currentText.length + 1)
-        }
-    }
-    type(delta) {
-        this.currentTimer -= delta;
-        if (this.currentTimer < 0) {
-            this.currentTimer = this.speed;
-            //typing next letter now
-            this.addNextLetter()
-            return true;
-        } else {
-            return false;
-        }
-    }
+	constructor(speed, final) {
+			this.currentText = '';
+			this.finalText = final;
+			this.currentTimer = 200;
+			this.speed = speed;
+			this.dead = false;
+	}
+	addNextLetter() {
+			//and check if writing is done
+			if (this.currentText == this.finalText) {
+					//console.log("Writing is done!")
+					this.dead = true;
+			} else {
+					//adding one letter
+					this.currentText = this.finalText.slice(0, this.currentText.length + 1)
+			}
+	}
+	type(delta) {
+			this.currentTimer -= delta;
+			if (this.currentTimer < 0) {
+					this.currentTimer = this.speed;
+					//typing next letter now
+					this.addNextLetter()
+					return true;
+			} else {
+					return false;
+			}
+	}
 }
 
 
@@ -229,17 +524,23 @@ let _isClickPossible = false;
 const chatboxModule = new TypewritersMax()
 let _timer = new Date().getTime();
 let animate = () => {
-    _delta = new Date().getTime() - _timer;
-    _timer = new Date().getTime();
-    //console.log("delta equal " + _delta)
-    //TYPEWRITERS AND CHATS
-    chatboxModule.executeTypingAcrossAllArrays(_delta)
-    myNewMiner.mineLoop(_delta)
-    window.requestAnimationFrame(animate)
+	_delta = new Date().getTime() - _timer;
+	_timer = new Date().getTime();
+	//console.log("delta equal " + _delta)
+	//TYPEWRITERS AND CHATS
+	chatboxModule.executeTypingAcrossAllArrays(_delta)
+	myNewMiner.mineLoop(_delta)
+	window.requestAnimationFrame(animate)
 }
 animate();
 
 
-    </script>
-  </body>
+
+
+
+
+	</script>
+
+
+</body>
 </html>
