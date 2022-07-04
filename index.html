@@ -3,386 +3,78 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link href="http://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
     <style media="screen">
-      @import url('http://fonts.cdnfonts.com/css/common-pixel');
-    body{
-      background-color: #3d2936;
-      overflow: hidden;
-      font-weight: 100;
-      font-family: 'Common Pixel', sans-serif;
-      font-size:30px;
-      color:#ffdcc9;
-/* font-style: normal;
-            overflow-x: hidden;
-            background-color: whitesmoke;
-            text-align: center; */
-    }
-
-      .snapHolder{
-        height:100vh;
-        overflow: auto;
-        scroll-snap-type: y mandatory;
+      body{
+        font-size: 4vw;
       }
-
-      .page1{
-        height:100vh;
-        background-color:black;
-        scroll-snap-align:start;
-      }
-      .page2{
-        /* height:100vh; */
-        /* background-color:#0B0B45; */
-        background-color: #8e2e41;
-        scroll-snap-align:start;
-
-        font-style: normal;
-                    /* overflow-x: scroll;
-                    background-color: whitesmoke;
-                    text-align: center;
-                    white-space: nowrap; */
-      }
-      .page3{
-        height:100vh;
-        background-color:#4c7d3f;
-        scroll-snap-align:start;
-      }
-
-
-      .centerTop {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-      padding-top: 33vh;
-      height: 100vh;
-      font-size: 50px;
-      text-align: center;
-      }
-
-        .movingPlatform{
-          color: white;
-          font-size: 50px;
-        }
-
-        .stage {
-       /* display: flex;
-       height: 330px;
-       width: 50%;
-       position: fixed; */
-       /* background-color: green; */
-       /* border: solid; */
-   }
-   .box {
-       align-self: flex-end;
-       animation-duration: 2s;
-       animation-iteration-count: infinite;
-      background-image: url(https://raw.githubusercontent.com/mooodev/goblintown/main/images/pixelarrow.png);
-       height: 100px;
-       margin: 0 auto;
-       transform-origin: bottom;
-       width: 100px;
-       background-size: contain;
-background-repeat: no-repeat;
-
-   }
-   .bounce-7 {
-       animation-name: bounce-7;
-       animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
-   }
-   .imageTest{
-     width: 100%;
-   }
-   .textWrapper{
-   		width: 55%;
-   		margin: 20px;
-   		padding-top: 5vh;
-   		padding-bottom: 5vh;
-        color:white;
-   	}
-    .container{
-      /*background-color: darkgray;*/
-      width: 80%;
-      font-size: 30px;
-      margin: auto;
-    }
-
-    .chatBox{
-      width: 80%;
-      height: 20vh;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: gray;
-      margin: auto;
-      border-style: solid;
-      color: white;
-      -webkit-transition: ease 0.7s;
-      transition: ease 0.7s;
-      opacity: 0;
-    }
-
-   @keyframes bounce-7 {
-       0%   { transform: scale(1,1)      translateY(0); }
-       10%  { transform: scale(1.1,.9)   translateY(0); }
-       30%  { transform: scale(.9,1.1)   translateY(-100px); }
-       50%  { transform: scale(1.05,.95) translateY(0); }
-       57%  { transform: scale(1,1)      translateY(-7px); }
-       64%  { transform: scale(1,1)      translateY(0); }
-       100% { transform: scale(1,1)      translateY(0); }
-   }
-
-
-     .preview-block__btn {
-         max-width: 600px;
-         margin-top: 35px;
-     }
-
-     .custom-btn {
-         display: -webkit-box;
-         display: -ms-flexbox;
-         display: flex;
-         -webkit-box-orient: horizontal;
-         -webkit-box-direction: normal;
-         -ms-flex-flow: row nowrap;
-         flex-flow: row nowrap;
-         -webkit-box-pack: center;
-         -ms-flex-pack: center;
-         justify-content: center;
-         -webkit-box-align: center;
-         -ms-flex-align: center;
-         align-items: center;
-         position: relative;
-         font-size: 15px;
-         font-weight: bold;
-         color: #000;
-         text-align: center;
-         text-transform: uppercase;
-         cursor: pointer;
-         overflow: hidden;
-         background: black;
-         -webkit-transition: ease 0.3s;
-         transition: ease 0.3s;
-     }
-     .custom-btn:after {
-         content: '';
-         display: block;
-         width: 60px;
-         height: 1000px;
-         margin-left: 60px;
-         background: #fff;
-         background: -moz-linear-gradient(top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.7) 100%);
-         background: -webkit-linear-gradient(top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0.7) 100%);
-         background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0.7) 100%);
-         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3ffffff', endColorstr='#b3ffffff',GradientType=0 );
-         position: absolute;
-         left: -40px;
-         top: -200px;
-         z-index: 1;
-         -webkit-transform: rotate(45deg);
-         transform: rotate(45deg);
-         -webkit-transition: all 0.1s;
-         transition: all 0.1s;
-         -webkit-animation-name: slideme;
-         animation-name: slideme;
-         -webkit-animation-duration: 3s;
-         animation-duration: 3s;
-         -webkit-animation-delay: 0.05s;
-         animation-delay: 0.05s;
-         -webkit-animation-timing-function: ease-in-out;
-         animation-timing-function: ease-in-out;
-         -webkit-animation-iteration-count: infinite;
-         animation-iteration-count: infinite;
-     }
-
-     @-webkit-keyframes slideme {
-         0% { left: -350px; margin-left: 0px; }
-         30% { left: 150%; margin-left: 80px; }
-         100% { left: 150%; margin-left: 80px; }
-     }
-     .eggBlock{
-       width: 45%;
-       height: 50vh;
-       text-align:center;
-       margin: 0 auto;
-       border: 1rem solid;
-       border-radius: 25px;
-       margin-top: 30vh;
-       color: whitesmoke;
-     }
     </style>
   </head>
   <body>
-    <div class="chatBox" id="chatBox">
-Hello hello nigga
-    </div>
-    <div class="snapHolder" id="snapHolder">
+    <h1 id="mainHeaderPanel">wlcome</h1>
+    <p id="mainInfoPanel">Hello world</p>
+    <p id="infoPanel">Hello world</p>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <div class="page1" id="page1">
 
-<div class="centerTop"> FEEBLE HUMANS <br> VS <img class="imageTest" src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/136337bd8c2f7b511ea50ee763ca82268cb52ec2a6516d042061f174467c5bd01a91d69a115cceccda39a3ee5e6b4b0d3255bfef95601890afd8070933aa5fd82e2c07d88ace3be5beb1e62c.png" alt="pixel goblins logo">
-
-<div class="stage">
-    <div class="box bounce-7"  id="stage"></div>
-</div>
-</div>
-    </div>
-    <div class="page2" id="page2" hidden>
-      <div class="container">
-      <div class="textWrapper" id="change1">
-    <h3>Elites</h3>
-    To become the King of Goblins, one must assasinate previous king. So only the dumbest seek the position of leadership. Which pretty much are all of them..
-    </div>
-      <div class="textWrapper" id="change2">
-    <h3>Workers</h3>
-    The bigger dem Goblins, the harder they avoid work..
-    </div>
-    <div class="textWrapper" id="change3">
-    <h3>Fighters</h3>
-    Throw enough goblins at any problem, and it should make it go away. At the very least there will be fewer goblins..
-    </div>
-  </div>
-      <!--HORISONTAL SCROLLING-->
-      <!-- <div style="width: 290%; height: 100vh;" id="yscroll" >
-      	<p style="font-size: 80px; padding-top: 30vh">
-      	scroll 🍉 scroll 	🍉scroll 🍉 scroll 	🍉scroll 🍉 scroll 	🍉 scroll 	🍉 scroll 	🍉 scroll 	🍉 yay	🍍
-      	</p>
-      </div> -->
-
-    </div>
-    <div class="page3" id="page3">
-      <!-- <div class="preview-block__btn custom-btn eggBlock">  <img class="" src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/download%20(1).png" alt="goblin egg">
-      </div> -->
-    </div>
-  </div>
     <script type="text/javascript">
-//
-//
-// document.getElementById("snapHolder").addEventListener("wheel", function(e) {
-// if(document.getElementById("snapHolder").scrollTop >= 1153){
-//
-//   //document.getElementById("page2").scrollLeft
-//   document.getElementById("page2").scrollTo(document.getElementById("page2").scrollLeft + e.deltaY, 0)
-//
-//   if(document.getElementById("page2").scrollLeft > 3000){
-//     document.getElementById("page3").style.height = "100vh"
-//     console.log("ebaa",e)
-//   }
-// }
-// })
-
-      class PageSettings{
-        constructor(){
-          this.currentPage = 0;
-          this.pages = ["#page1","#page2","#page3"];
-          this.pageOffsets = [];
-          for(let n = 0; n < 3 ; n++){
-            let temp = document.querySelector(this.pages[n]).offsetTop
-             this.pageOffsets.push(temp)
-          }
-        }
-        calculateCurrentPage(){
-          let _temp = 0;
-          for(let n = this.pages.length ; n > 0; n--){
-            if( document.getElementById("snapHolder").scrollTop >= this.pageOffsets[n]-10 ){
-              //console.log("current page is " + this.pages[n])
-              _temp = n;
-              n = -1;
-            }
-          }
-          return _temp;
-        }
-
-      }
+      console.log("Hello world")
+let tg = window.Telegram.WebApp;
 
 
 
-    // document.getElementById("snapHolder").addEventListener("scroll",()=>{
-    //
-    // })
+
+//g.initData //получаем данные от пользователя в виде строки (работает только при запуске из меню команд бота).
+//tg.initDataUnsafe // получаем данные от пользователя в виде объекта (работает только при запуске из меню команд бота).
+ // возвращает true, если приложение открыто на всю высоту, false - если нет.
+console.log(tg.viewportHeight) // вернёт ширину окна.
+//tg.sendData("Hello") // отправляет данные  боту в строковом виде, после чего закрывает приложение (работает только если приложение запущено с keyboard button).
+
+
+window.addEventListener('load', (event) => {
+  console.log('page is fully loaded');
+  tg.expand()
+  // tg.close() // метод закрывает приложение.
+
+  tg.MainButton.text = 'Its Hack-time!' // текст кнопки, по умолчанию: "Continue"
+  // tg.MainButton.color // цвет текста
+  // tg.MainButton.textColor // цвет подложки
+  // tg.MainButton.isVisible // видна ли кнопка (по умолчанию false)
+  tg.MainButton.isActive // активна ли кнопка (по умолчанию true)
+
+  tg.MainButton.onClick(testingMainButton) // метод при нажатии на кнопку
+  tg.MainButton.enable() // сделать активной
+  tg.MainButton.show() // показать кнопку
+  // tg.MainButton.hide() // скрыть кнопку
+
+  // tg.MainButton.disable() // сделать неактивной
+  // tg.MainButton.setParams(params) // задает параметры в виде объекта
+
+//  tg.expand()// метод позволяет растянуть окно на всю высоту.
+});
+
+
+var testingMainButton = () => {
+  console.log("Oh yeahhh")
+  document.getElementById("mainHeaderPanel").textContent = "big error"
+  tg.MainButton.setText("Typing...") //  метод для задания текста
+
+  setTimeout(() => {
+    myTimer();
+  }, "1000")
+
+}
+
+
+function myTimer() {
+  console.log("Waited!")
+  tg.MainButton.setText('Its Hack-time!') //  метод для задания текста
+
+  chatboxModule.addTypewriter(document.getElementById("mainInfoPanel"), "Heawdawdllo this is tawdawdawdest", 200)
+  chatboxModule.addTypewriter(document.getElementById("infoPanel"), "Hewdawdllo this iwdawdas tadwdawdest", 100)
+}
 
 
 
-      // var document.getElementById("snapHolder")Analogue = document.getElementById("snapHolder")
-      //
-      //
-      //  var container = document.getElementById("container");
-      //  	var stickyImage = document.getElementById("stickyImage");
-      //  	var tempY;
-      //  	document.getElementById("snapHolder")Analogue.addEventListener("scroll", (e) => {
-      //  	//watch how image moves with scrolleing
-      //  		if(document.getElementById("snapHolder")Analogue.pageYOffset >= container.offsetTop && document.getElementById("snapHolder")Analogue.pageYOffset <= container.offsetTop+container.offsetHeight  - document.getElementById("snapHolder")Analogue.innerHeight ){
-      //  			console.log("sliding");
-      //  			stickyImage.style.position = "fixed";
-      //  			stickyImage.style.top = "0vh";
-      //  			stickyImage.style.marginTop = "";
-      //  			tempY = document.getElementById("snapHolder")Analogue.pageYOffset;
-      //  		}else if(document.getElementById("snapHolder")Analogue.pageYOffset <= container.offsetTop){
-      //  			console.log("top screen");
-      //  			stickyImage.style.position = "absolute";
-      //  			stickyImage.style.top = "";
-      //  			stickyImage.style.marginTop = "";
-      //  		}else{
-      //  			console.log("stop");
-      //  			stickyImage.style.position = "absolute";
-      //  			stickyImage.style.marginTop = tempY + "px";
-      //  		}
-      //  	//change images while scroll
-      //  		if(document.getElementById("snapHolder")Analogue.pageYOffset < document.getElementById("change1").offsetTop){
-      //  			stickyImage.textContent = "🍓🍓🍓";
-      //  		}
-      //  		if(document.getElementById("snapHolder")Analogue.pageYOffset > document.getElementById("change1").offsetTop){
-      //  			stickyImage.textContent = "🍌🍌🍌";
-      //  		}
-      //  		if(document.getElementById("snapHolder")Analogue.pageYOffset > document.getElementById("change2").offsetTop){
-      //  			stickyImage.textContent = "🍏🍏🍏";
-      //  		}
-      //  	})
-
-// document.getElementById("snapHolder").pageYOffset
-//
-      // var xVar = 0;
-      // document.getElementById("snapHolder").addEventListener("wheel", function(e) {
-      //     if (e.deltaY > 0) {
-      //         //scroling down
-      //         if (document.getElementById("snapHolder").scrollTop - document.getElementById("yscroll").offsetTop >= 0 && xVar > document.getElementById("yscroll").offsetWidth * (-1) + document.getElementById("snapHolder").innerWidth) {
-      //             document.getElementById("snapHolder").scrollTo(0, document.getElementById("yscroll").offsetTop);
-      //             xVar = xVar - e.deltaY;
-      //             if (xVar < document.getElementById("yscroll").offsetWidth * (-1) + document.getElementById("snapHolder").innerWidth) xVar = document.getElementById("yscroll").offsetWidth * (-1) + document.getElementById("snapHolder").innerWidth;
-      //             document.body.style.overflowY = "hidden";
-      //         } else {
-      //             document.body.style.overflowY = "scroll";
-      //         }
-      //     } else if (e.deltaY < 0) {
-      //         //scroling up
-      //         if (document.getElementById("snapHolder").scrollTop - document.getElementById("yscroll").offsetTop <= 0 && xVar < 0) {
-      //             document.getElementById("snapHolder").scrollTo(0, document.getElementById("yscroll").offsetTop);
-      //             xVar = xVar - e.deltaY;
-      //             if (xVar > 0) xVar = 0;
-      //             document.body.style.overflowY = "hidden";
-      //         } else {
-      //             document.body.style.overflowY = "scroll";
-      //         }
-      //     }
-      //     document.getElementById("yscroll").style.marginLeft = xVar + "px";
-      // })
-
-
-//       let _stupidTypeWriterFinalText;
-//       let stupidTypeWriter = (target,text) => {
-//         _stupidTypeWriterFinalText = text;
-//         if(target !== stupidTypeWriterFinalText){
-//         //document.getElementById("chatBox").innerText = "TEZTING TEZTING"
-//
-//
-//       }
-//     //  let text2 = _stupidTypeWriterFinalText.slice(target.length,text.length+1);
-//     //  stupidTypeWriter(target,text2)
-//       }
-//
-// stupidTypeWriter(document.getElementById("chatBox").innerText,"TEZTING TEZTING");
-//
 
 class TypewritersMax {
     constructor() {
@@ -451,11 +143,7 @@ class CommonTypewriter {
 }
 
 
-//chatboxModule.addTypewriter(document.getElementById("chatBox"), "Hello this is test", 100)
-// chatboxModule.addTypewriter(document.getElementById("change1"), "Heawdawdllo this is tawdawdawdest", 200)
-// chatboxModule.addTypewriter(document.getElementById("change2"), "Hewdawdllo this iwdawdas tadwdawdest", 100)
-// chatboxModule.addTypewriter(document.getElementById("change3"), "Heawdallo thawdawdis is tawdest", 100)
-const myPage = new PageSettings();
+
 const chatboxModule = new TypewritersMax()
 let _timer = new Date().getTime();
 let animate = () => {
@@ -464,25 +152,12 @@ let animate = () => {
     //console.log("delta equal " + _delta)
     //TYPEWRITERS AND CHATS
     chatboxModule.executeTypingAcrossAllArrays(_delta)
-    //PAGE UPDATES
-    let _currentPage = myPage.calculateCurrentPage()
-    if(_currentPage == 0){
-    //  console.log("page 1")
-    }else if(_currentPage == 1){
-    //    console.log("page 2")
-    document.getElementById("stage").hidden = true;
-    }else if(_currentPage == 2){
-    //    console.log("page 3")
-    }
+
     window.requestAnimationFrame(animate)
 }
 animate();
-
-
-
-
+chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "Hello this is test", 100)
 
     </script>
-
   </body>
 </html>
