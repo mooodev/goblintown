@@ -296,6 +296,7 @@ body {
 
 
 <div class="screen norton">
+	 <button type="button" onclick="testingMainButton()" name="button">test</button>
   <div class="win gray-theme" id="firstGUIBlock">
     <div class="caption"><div class="title">Miner Accont Commander:</div></div>
     <div>
@@ -321,7 +322,6 @@ body {
       <p>This theme design mimics <a href="http://en.wikipedia.org/wiki/Text-based_user_interface">Text-based user interface</a> from MS-DOS shell Noton Commander.</p>
     </div>
   </div> -->
-	 <button type="button" onclick="testingMainButton()" name="button">test</button>
 </div>
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
@@ -367,7 +367,11 @@ tg.MainButton.show() // показать кнопку
 var _el = document.querySelector(".captionPanel");
 let _temlEl = document.getElementById("secondGUIBlock").offsetTop + 120;
 let _temhEl = Math.round( document.getElementById("secondGUIBlock").innerWidth*0.9 )
-_temlEl = window.innerHeight - _temlEl;
+if(tg.viewportHeight !== undefined){
+	_temlEl = tg.viewportHeight - _temlEl;
+}else{
+	_temlEl = window.innerHeight - _temlEl;
+}
 _el.style.maxHeight = Number(_temlEl)+"px"
 _el.style.maxWidth = Number(_temhEl)+"px"
 });
