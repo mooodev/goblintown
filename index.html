@@ -41,7 +41,8 @@ const villagersSprites = document.getElementById("villagersSprites");
       window.addEventListener('load', (event) => {
         let choseChar = Math.floor(Math.random()*5)
         choseChar = choseChar*8
-        drawCharX(choseChar)
+        drawCharX(choseChar);
+        testCanvas.requestFullscreen();
 });
 
 
