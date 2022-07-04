@@ -1,31 +1,132 @@
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title></title>
     <style media="screen">
-      .footer{
-        <!-- background-image: url("/download.png"); -->
-        background-image: url("images/download.png");
-        background-color:gray;
-        height:200px;
+      body{
+        overflow:auto;
       }
+    canvas{
+      background-color:green;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -webkit-crisp-edges;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+
+    }
     </style>
   </head>
   <body>
+    <img hidden id="villagersSprites" src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/01%20-%20Full%20spritesheet%20(16x24).png" alt="">
+    <div class="" id="mainHolder">
 
-
-    <div class="footer">
-      hello world
     </div>
+    <script type="text/javascript">
+
+const mainCanvas =  document.createElement("canvas");
+mainCanvas.width = 8 * 16;
+mainCanvas.height = 4 * 24;
+mainCanvas.hidden = true;
+const testCanvas =  document.createElement("canvas");
+testCanvas.width = window.innerWidth  /  16;
+// testCanvas.height = window.innerHeight  / 24;
+testCanvas.style.width =  "10%"
+document.getElementById("mainHolder").appendChild(testCanvas)
+const villagersSprites = document.getElementById("villagersSprites");
 
 
+      window.addEventListener('load', (event) => {
+        let choseChar = Math.floor(Math.random()*5)
+        choseChar = choseChar*8
+        drawCharX(choseChar)
+});
+
+
+let drawCharX = (x) => {
+  console.log("drawting " + x);
+  let _x = x*16
+  let _y = (4*Math.floor(Math.random()*2))*24
+
+  document.getElementById("mainHolder").appendChild(mainCanvas)
+ let backCtx = mainCanvas.getContext('2d');
+ let newCoordinates =
+  backCtx.drawImage(villagersSprites,_x,_y,8*16,4*24,0,0,8*16,4*24);
+
+
+}
+
+
+class Player{
+  constructor(){
+    this.pixelVisuals;
+  }
+}
+
+class Animator{
+  constructor(sourse){
+    this.pixelRatio = [16,24];
+    this.tileRatio = [4,4];
+    this.currentY = 0;
+    this.currentX = 0;
+    this.targetSpeed = 350;
+    this.currentTimer = 250;
+    this.source = sourse.getContext("2d");
+    this.idle = true;
+  }
+  animate(delta){
+    if(this.incrementDelta(delta)){
+        this.source.clearRect(0, 0, 200,200);
+        let tempX = 0;
+      if(this.idle){
+        tempX = this.currentX
+    }else{
+      tempX = this.currentX + 4;
+    }
+      this.source.drawImage(mainCanvas, tempX * 16 , this.currentY * 24 ,16,24,0,0,16,24 );
+    }
+  }
+
+  incrementDelta(delta){
+    this.currentTimer -= delta;
+    if(this.currentTimer < 0){
+      //animation frame
+      this.currentTimer = this.targetSpeed;
+      this.currentX++;
+      if(this.currentX == this.tileRatio[0]){
+        this.currentX = 0;
+      }
+      return true;
+    }
+    return false;
+  }
+}
+
+
+
+let testPlayer = new Player();
+testPlayer.pixelVisuals = new Animator(testCanvas)
+
+let _timer = new Date().getTime();
+let animate = () => {
+    _delta = new Date().getTime() - _timer;
+    _timer = new Date().getTime();
+
+
+testPlayer.pixelVisuals.animate(_delta)
+
+
+
+  window.requestAnimationFrame(animate)
+}
+
+animate();
+
+
+
+
+    </script>
   </body>
-  <script type="text/javascript">
-
-
-
-
-
-  </script>
 </html>
