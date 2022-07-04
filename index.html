@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-    <h1 id="mainHeaderPanel"></h1>
+    <h1 id="mainHeaderPanel">wlcome</h1>
     <p id="mainInfoPanel">Hello world</p>
     <p id="infoPanel">Hello world</p>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -50,7 +50,7 @@ window.addEventListener('load', (event) => {
 
 var testingMainButton = () => {
   console.log("Oh yeahhh")
-  document.getElementById("header").textContent = "big error"
+  document.getElementById("mainHeaderPanel").textContent = "big error"
   tg.MainButton.setText("Danger is near..") //  метод для задания текста
 }
 
