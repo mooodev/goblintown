@@ -3,137 +3,134 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <style media="screen">
-      body{
-        overflow:hidden;
-      }
-    canvas{
-      background-color:transparent;
-      image-rendering: -moz-crisp-edges;
-      image-rendering: -webkit-crisp-edges;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
-
-      width: 100%;
-      height: 100vh;
-    }
-    </style>
   </head>
+  <style media="screen">
+    body{
+      overflow:hidden;
+    }
+  </style>
   <body>
-    <button onclick="_openFullScreen()">Full screen</button>
-    <img hidden id="villagersSprites" src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/01%20-%20Full%20spritesheet%20(16x24).png" alt="">
-    <div class="" id="mainHolder">
-
-    </div>
-    <script type="text/javascript">
+    <img hidden id="tilesetPlayers" src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/01%20-%20Full%20spritesheet%20(16x24).png" alt="">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 
- const _openFullScreen = () => {
-   testCanvas.requestFullscreen()
- }
-
-
-const mainCanvas =  document.createElement("canvas");
-mainCanvas.width = window.innerWidth ;
-mainCanvas.height = window.innerHeight;
-mainCanvas.hidden = true;
-const testCanvas =  document.createElement("canvas");
-// testCanvas.width = window.innerWidth;
-// testCanvas.height = window.innerHeight  / 24;
-// testCanvas.style.width =  "10%"
-document.getElementById("mainHolder").appendChild(testCanvas)
-const villagersSprites = document.getElementById("villagersSprites");
-
-
-      window.addEventListener('load', (event) => {
-        let choseChar = Math.floor(Math.random()*5)
-        choseChar = choseChar*8
-        drawCharX(choseChar)
-});
-
-
-let drawCharX = (x) => {
-  console.log("drawting " + x);
-  let _x = x*16
-  let _y = (4*Math.floor(Math.random()*2))*24
-
-  document.getElementById("mainHolder").appendChild(mainCanvas)
- let backCtx = mainCanvas.getContext('2d');
- let newCoordinates =
-  backCtx.drawImage(villagersSprites,_x,_y,8*16,4*24, 0,0,8*16,4*24);
-
-
-}
-
-
-class Player{
-  constructor(){
-    this.pixelVisuals;
-  }
-}
-
-class Animator{
-  constructor(sourse){
-    this.pixelRatio = [16,24];
-    this.tileRatio = [4,4];
-    this.currentY = 0;
-    this.currentX = 0;
-    this.targetSpeed = 350;
-    this.currentTimer = 250;
-    this.source = sourse.getContext("2d");
-    this.idle = true;
-  }
-  animate(delta){
-    if(this.incrementDelta(delta)){
-        this.source.clearRect(0, 0, 200,200);
-        let tempX = 0;
-      if(this.idle){
-        tempX = this.currentX
-    }else{
-      tempX = this.currentX + 4;
-    }
-      this.source.drawImage(mainCanvas, tempX * 16 , this.currentY * 24 ,16,24,130,20,16*3,24*3 );
-    }
-  }
-
-  incrementDelta(delta){
-    this.currentTimer -= delta;
-    if(this.currentTimer < 0){
-      //animation frame
-      this.currentTimer = this.targetSpeed;
-      this.currentX++;
-      if(this.currentX == this.tileRatio[0]){
-        this.currentX = 0;
-      }
-      return true;
-    }
-    return false;
-  }
-}
-
-
-
-let testPlayer = new Player();
-testPlayer.pixelVisuals = new Animator(testCanvas)
-
-let _timer = new Date().getTime();
-let animate = () => {
-    _delta = new Date().getTime() - _timer;
-    _timer = new Date().getTime();
-
-
-testPlayer.pixelVisuals.animate(_delta)
-
-
-
-  window.requestAnimationFrame(animate)
-}
-
-animate();
+      <script type="text/javascript">
+        console.log("Hello world")
 
 
 
 
-    </script>
+        var keyState = [];
+
+        window.addEventListener("keydown", function(e) {
+        keyState[e.keyCode] = true;
+        });
+        window.addEventListener("keyup", function(e) {
+        keyState[e.keyCode] = false;
+        });
+
+
+
+
+
+
+
+
+        //texture animator duh
+        function TextureAnimator(texture, tilesHoriz, tilesVert, fromTile, numTiles, tileDispDuration) {
+        			this.tilesHorizontal = tilesHoriz;
+        			this.tilesVertical = tilesVert;
+        			// how many images does this spritesheet contain?
+        			this.numberOfTiles = numTiles;
+        			texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        			texture.repeat.set(1 / this.tilesHorizontal, 1 / this.tilesVertical);
+        			// how long should each image be displayed?
+        			this.tileDisplayDuration = tileDispDuration;
+        			// how long has the current image been displayed?
+        			this.currentDisplayTime = 0;
+        			// which image is currently being displayed?
+        			this.currentTile = 0;
+        			this.update = function(milliSec, tileRow) {
+        				this.currentDisplayTime += milliSec;
+        				while (this.currentDisplayTime > this.tileDisplayDuration) {
+        					this.currentDisplayTime -= this.tileDisplayDuration;
+        					this.currentTile++;
+        					if (this.currentTile == this.numberOfTiles)
+        						this.currentTile = 0;
+        					var currentColumn = this.currentTile % this.tilesHorizontal;
+        					texture.offset.x = (currentColumn) / this.tilesHorizontal;
+        					var currentRow = Math.floor(this.currentTile / this.tilesHorizontal) + tileRow;
+        					texture.offset.y = currentRow / this.tilesVertical;
+        					}
+        				};
+        			};
+
+
+              //THREE JS && 3d stuff
+              const scene = new THREE.Scene();
+              const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+              const renderer = new THREE.WebGLRenderer({  });
+              renderer.setSize( window.innerWidth, window.innerHeight );
+              document.body.appendChild( renderer.domElement );
+              camera.position.z = 10;
+              // camera.position.x = 8;
+              // camera.position.y = 8;
+
+              // var tileImg = document.createElement("IMG");
+              // var tileCanvas = document.createElement("CANVAS")
+              // tileCanvas.width = 32;
+              // tileCanvas.height = 32;
+              // tileImg.src = _FarmbgString;
+              // var tileCanvasctx = tileCanvas.getContext("2d");
+              //
+              // var _prepareBgTexture = () => {
+              //   tileCanvas.width = 32;
+              //   tileCanvas.height = 32;
+              //   tileCanvasctx.clearRect(0, 0, 32, 32);
+              //   tileCanvasctx.drawImage(tileImg, 160, 0, 32, 32, 0, 0, 32, 32);
+              // }
+              //
+              //
+              //
+              //
+              // class Player{
+              //
+              // }
+              // class PlayerAnimation{
+              //   this.sprite;
+              //   this.speed;
+              //   this.tileDimensions;
+              // }
+              //
+              //
+              //
+              let playerTexture = document.getElementById("tilesetPlayers")
+              let _texPlayers = new THREE.TextureLoader().load(playerTexture);
+              //  let testannie = new TextureAnimator(_texP, 4, 4, 2, 3, 175);
+               const geometryP = new THREE.PlaneGeometry(1, 1.5);
+               const materialP = new THREE.MeshBasicMaterial({
+                   // map: _texP,
+                   // transparent: true
+               });
+               let player = new THREE.Mesh(geometryP, materialP);
+               //player.material.map.needsUpdate = true;
+               scene.add(player);
+               player.position.x = 0;
+               player.position.y = 0;
+               player.position.z = 0.05;
+
+
+
+
+              var clock = new THREE.Clock();
+              const animate = function () {
+                var delta = clock.getDelta();
+
+                requestAnimationFrame( animate );
+                renderer.render( scene, camera );
+              };
+              animate();
+
+      </script>
   </body>
 </html>
