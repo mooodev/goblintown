@@ -16,14 +16,16 @@ body {
 	font-family: "PerfectDOSVGA437", monospace;
 	font-weight: normal;
 	-webkit-font-smoothing: none;
-	font-size: 16px;
+	/* font-size: 16px; */
 	background-color: black;
+	overflow: hidden;
 }
 
 .screen {
 	padding: 0;
 	border-bottom: 2px solid black;
 	border-top: 2px solid black;
+
 }
 
 .screen:first-child {
@@ -434,7 +436,10 @@ if(text == "REWARD RECIVED ---->"){
 	newElement.style.color = "yellow"
 }
 document.getElementById("mainInfoPanel").prepend(newElement)
-
+if(checkOverflow(newElement)){
+	console.log(checkOverflow(newElement))
+	addNewTypeInfoParagraph("overflowin")
+}
 chatboxModule.addTypewriter(newElement,text, 15)
 }
 
@@ -540,7 +545,24 @@ animate();
 
 
 
+// Determines if the passed element is overflowing its bounds,
+// either vertically or horizontally.
+// Will temporarily modify the "overflow" style to detect this
+// if necessary.
+function checkOverflow(el)
+{
+   var curOverflow = el.style.overflow;
 
+   if ( !curOverflow || curOverflow === "visible" )
+      el.style.overflow = "hidden";
+
+   var isOverflowing = el.clientWidth < el.scrollWidth
+      || el.clientHeight < el.scrollHeight;
+
+   el.style.overflow = curOverflow;
+
+   return isOverflowing;
+}
 
 
 	</script>
