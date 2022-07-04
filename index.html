@@ -343,18 +343,13 @@ console.log(tg.viewportHeight) // вернёт ширину окна.
 window.addEventListener('load', (event) => {
 console.log('page is fully loaded');
 
-var _el = document.querySelector(".captionPanel");
-let _temlEl = document.getElementById("secondGUIBlock").offsetTop + 10;
-let _temhEl = Math.round( document.getElementById("secondGUIBlock").innerWidth*0.9 )
-console.log(_temlEl)
-_el.style.maxHeight = Number(_temlEl)+"px"
-_el.style.maxWidth = Number(_temhEl)+"px"
+
 
 _isClickPossible = true;
 tg.expand()
 // tg.close() // метод закрывает приложение.
 
-tg.MainButton.text = 'Its Hack-time!' // текст кнопки, по умолчанию: "Continue"
+tg.MainButton.text = 'Start' // текст кнопки, по умолчанию: "Continue"
 // tg.MainButton.color // цвет текста
 // tg.MainButton.textColor // цвет подложки
 // tg.MainButton.isVisible // видна ли кнопка (по умолчанию false)
@@ -369,6 +364,12 @@ tg.MainButton.show() // показать кнопку
 // tg.MainButton.setParams(params) // задает параметры в виде объекта
 
 //  tg.expand()// метод позволяет растянуть окно на всю высоту.
+var _el = document.querySelector(".captionPanel");
+let _temlEl = document.getElementById("secondGUIBlock").offsetTop + 120;
+let _temhEl = Math.round( document.getElementById("secondGUIBlock").innerWidth*0.9 )
+_temlEl = window.innerHeight - _temlEl;
+_el.style.maxHeight = Number(_temlEl)+"px"
+_el.style.maxWidth = Number(_temhEl)+"px"
 });
 
 
