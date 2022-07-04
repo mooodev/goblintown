@@ -141,7 +141,6 @@ body {
 
 .norton {
 	background-color: #333333;
-	height: 100vh;
 }
 
 .norton .win {
@@ -291,18 +290,19 @@ body {
 
 <div class="screen norton">
  <button type="button" onclick="testingMainButton()" name="button">test</button>
-  <div class="win blue-theme">
+  <div class="win gray-theme">
     <div class="caption"><div class="title">Miner Accont Commander:</div></div>
     <div>
-      <p class="content-center"><strong>Balance</strong></p>
+			  <p class="content-center"><strong id="mainHeaderPanel">Connected</strong></p>
+      <!-- <p class="content-center"><strong>Balance</strong></p> -->
       <p>This account is empty , fill it up from from MS-DOS shell Noton Commander.</p>
     </div>
   </div>
 
-  <div class="win gray-theme">
+  <div class="win blue-theme">
     <div class="caption"><div class="title">Cryptography solving terminal workstation</div></div>
     <div>
-      <p class="content-center"><strong id="mainHeaderPanel">Waiting</strong></p>
+
 			  <div id="mainInfoPanel">
     </div>
 		</div>
@@ -430,7 +430,11 @@ if(Number(hash.charAt(n)) == n){
 
 let addNewTypeInfoParagraph = (text) => {
 let newElement = document.createElement("p");
+if(text == "REWARD RECIVED ---->"){
+	newElement.style.color = "yellow"
+}
 document.getElementById("mainInfoPanel").prepend(newElement)
+
 chatboxModule.addTypewriter(newElement,text, 15)
 }
 
