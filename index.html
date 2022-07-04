@@ -8,11 +8,14 @@
         font-size: 4vw;
         color:#008106;
         background-color:#1f1f1f;
-        overflow:hidden;
+      }
+      >mainHolder{
+        overflow:scroll;
       }
     </style>
   </head>
   <body>
+    <button type="button" onclick="testingMainButton()" name="button">test</button>
     <div class="mainHolder">
       <h1 id="mainHeaderPanel">wlcome</h1>
       <p id="mainInfoPanel">All game action data goes here..</p>
@@ -36,6 +39,7 @@ console.log(tg.viewportHeight) // вернёт ширину окна.
 
 window.addEventListener('load', (event) => {
   console.log('page is fully loaded');
+  _isClickPossible = true;
   tg.expand()
   // tg.close() // метод закрывает приложение.
 
@@ -58,43 +62,34 @@ window.addEventListener('load', (event) => {
 
 
 var testingMainButton = () => {
-  console.log("Oh yeahhh")
-  chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///Hacking in action!", 100)
-  tg.MainButton.setText("Typing...") //  метод для задания текста
-
-  setTimeout(() => {
+  if(_isClickPossible){
     _isClickPossible = false;
-    myTimer();
-  }, "1000")
+    chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///Hacking in action!", 10)
+    let string = Math.random();
+    let _hashedString = "0x_" + string + "hashed.."
+    let newElement = document.createElement("p");
+    document.getElementById("mainInfoPanel").appendChild(newElement)
+    chatboxModule.addTypewriter(newElement, _hashedString, 50)
+    tg.MainButton.setText("Typing...") //  метод для задания текста
+    setTimeout(() => {
+      myTimer();
+    }, "1000")
+  }else{
+    console.log("not yet ready")
+  }
+
 
 }
 
 
 function myTimer() {
-  _isClickPossible = true;
-  chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "..snackby/standby mode", 100)
+  chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "..snackby/standby mode", 10)
   console.log("Waited!")
   tg.MainButton.setText('Its Hack-time!') //  метод для задания текста
-  let newElement = document.createElement("p");
-  document.getElementById("mainInfoPanel").appendChild(newElement)
-  let string = Math.random();
-  let _hashedString = cyrb53(string)
-  chatboxModule.addTypewriter(newElement, _hashedString, 50)
+  _isClickPossible = true;
 }
 
 
-
-const cyrb53 = function(str, seed = 0) {
-    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-    for (let i = 0, ch; i < str.length; i++) {
-        ch = str.charCodeAt(i);
-        h1 = Math.imul(h1 ^ ch, 2654435761);
-        h2 = Math.imul(h2 ^ ch, 1597334677);
-    }
-    h1 = Math.imul(h1 ^ (h1>>>16), 2246822507) ^ Math.imul(h2 ^ (h2>>>13), 3266489909);
-    h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
-    return 4294967296 * (2097151 & h2) + (h1>>>0);
-};
 
 
 class TypewritersMax {
@@ -164,7 +159,7 @@ class CommonTypewriter {
 }
 
 
-let _isClickPossible = true;
+let _isClickPossible = false;
 const chatboxModule = new TypewritersMax()
 let _timer = new Date().getTime();
 let animate = () => {
