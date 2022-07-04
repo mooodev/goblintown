@@ -17,9 +17,9 @@
   <body>
     <button type="button" onclick="testingMainButton()" name="button">test</button>
 
-      <h1 id="mainHeaderPanel">wlcome</h1>
+      <h1 id="mainHeaderPanel">Miner 0.0.1</h1>
       <div class="mainHolder">
-      <p id="mainInfoPanel">All game action data goes here..</p>
+      <p id="mainInfoPanel">c:/_</p>
     </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
@@ -75,10 +75,14 @@ class Miner{
   }
   powerOn(){
     this.powered = true;
+    tg.MainButton.setText("Mining...")
+    chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///Mining in action!", 10)
     this.nonce = 0;
   }
   powerOff(){
     this.powered = false;
+    tg.MainButton.setText("Start")
+    chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///standby mode...", 10)
   }
   mineLoop(delta){
     if(this.powered){
@@ -90,7 +94,8 @@ class Miner{
     }
   }
   hashingProcess(){
-    let _nonceString = this.currentString.toString() + this.nonce + this.userId.toString();
+    this.currentString = world.currentSituation.toString()
+    let _nonceString = this.currentString + this.nonce + this.userId.toString();
     this.nonce++;
     let hash;
     hash = CryptoJS.SHA256(_nonceString.toString());
@@ -108,6 +113,7 @@ class Miner{
 class World{
   constructor(){
     this.difficulty = 1;
+    this.currentSituation = Math.random()
   }
   checkForReward(hash){
 let difficultyJackpot = 0;
@@ -118,6 +124,7 @@ for(let n = 0; n < this.difficulty ; n++){
 }
     if(difficultyJackpot == this.difficulty){
       //solved! Recive reward please
+      this.currentSituation = Math.random()
       return true;
     }else{
       return false;
@@ -128,22 +135,20 @@ for(let n = 0; n < this.difficulty ; n++){
 
 let addNewTypeInfoParagraph = (text) => {
   let newElement = document.createElement("p");
-  document.getElementById("mainInfoPanel").appendChild(newElement)
+  document.getElementById("mainInfoPanel").prepend(newElement)
   chatboxModule.addTypewriter(newElement,text, 15)
 }
 
 
 const world = new World();
 const myNewMiner = new Miner();
-myNewMiner.speed = 5000;
+myNewMiner.speed = 2500;
 
 
 
 var testingMainButton = () => {
   if(!myNewMiner.powered){
-    chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///Hacking in action!", 10)
     myNewMiner.powerOn();
-    tg.MainButton.setText("Typing...") //  метод для задания текста
   }else{
     console.log("not yet ready")
   }
