@@ -19,13 +19,15 @@ body {
 	/* font-size: 16px; */
 	background-color: black;
 	overflow: hidden;
+	/* filter: invert(1); */
 }
 
 .screen {
 	padding: 0;
 	border-bottom: 2px solid black;
 	border-top: 2px solid black;
-
+	height: 100vh;
+	width: 100%;
 }
 
 .screen:first-child {
@@ -258,6 +260,9 @@ body {
 	padding-left: 0.8em;
 	padding-right: 0.8em;
 }
+.captionPanel{
+	 overflow: scroll;
+}
 
 	</style>
 </head>
@@ -291,8 +296,7 @@ body {
 
 
 <div class="screen norton">
- <button type="button" onclick="testingMainButton()" name="button">test</button>
-  <div class="win gray-theme">
+  <div class="win gray-theme" id="firstGUIBlock">
     <div class="caption"><div class="title">Miner Accont Commander:</div></div>
     <div>
 			  <p class="content-center"><strong id="mainHeaderPanel">Connected</strong></p>
@@ -301,11 +305,11 @@ body {
     </div>
   </div>
 
-  <div class="win blue-theme">
+  <div class="win blue-theme" id="secondGUIBlock">
     <div class="caption"><div class="title">Cryptography solving terminal workstation</div></div>
     <div>
 
-			  <div id="mainInfoPanel">
+			  <div class="captionPanel" id="mainInfoPanel">
     </div>
 		</div>
   </div>
@@ -317,6 +321,7 @@ body {
       <p>This theme design mimics <a href="http://en.wikipedia.org/wiki/Text-based_user_interface">Text-based user interface</a> from MS-DOS shell Noton Commander.</p>
     </div>
   </div> -->
+	 <button type="button" onclick="testingMainButton()" name="button">test</button>
 </div>
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
@@ -337,6 +342,14 @@ console.log(tg.viewportHeight) // вернёт ширину окна.
 
 window.addEventListener('load', (event) => {
 console.log('page is fully loaded');
+
+var _el = document.querySelector(".captionPanel");
+let _temlEl = document.getElementById("secondGUIBlock").offsetTop + 10;
+let _temhEl = Math.round( document.getElementById("secondGUIBlock").innerWidth*0.9 )
+console.log(_temlEl)
+_el.style.maxHeight = Number(_temlEl)+"px"
+_el.style.maxWidth = Number(_temhEl)+"px"
+
 _isClickPossible = true;
 tg.expand()
 // tg.close() // метод закрывает приложение.
