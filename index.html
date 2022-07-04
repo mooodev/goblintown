@@ -6,13 +6,17 @@
     <style media="screen">
       body{
         font-size: 4vw;
+        color:#008106;
+        background-color:#1f1f1f;
+        overflow:hidden;
       }
     </style>
   </head>
   <body>
-    <h1 id="mainHeaderPanel">wlcome</h1>
-    <p id="mainInfoPanel">Hello world</p>
-    <p id="infoPanel">Hello world</p>
+    <div class="mainHolder">
+      <h1 id="mainHeaderPanel">wlcome</h1>
+      <p id="mainInfoPanel">All game action data goes here..</p>
+    </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 
@@ -55,10 +59,11 @@ window.addEventListener('load', (event) => {
 
 var testingMainButton = () => {
   console.log("Oh yeahhh")
-  document.getElementById("mainHeaderPanel").textContent = "big error"
+  chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///Hacking in action!", 100)
   tg.MainButton.setText("Typing...") //  метод для задания текста
 
   setTimeout(() => {
+    _isClickPossible = false;
     myTimer();
   }, "1000")
 
@@ -66,14 +71,30 @@ var testingMainButton = () => {
 
 
 function myTimer() {
+  _isClickPossible = true;
+  chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "..snackby/standby mode", 100)
   console.log("Waited!")
   tg.MainButton.setText('Its Hack-time!') //  метод для задания текста
-
-  chatboxModule.addTypewriter(document.getElementById("mainInfoPanel"), "Heawdawdllo this is tawdawdawdest", 200)
-  chatboxModule.addTypewriter(document.getElementById("infoPanel"), "Hewdawdllo this iwdawdas tadwdawdest", 100)
+  let newElement = document.createElement("p");
+  document.getElementById("mainInfoPanel").appendChild(newElement)
+  let string = Math.random();
+  let _hashedString = cyrb53(string)
+  chatboxModule.addTypewriter(newElement, _hashedString, 50)
 }
 
 
+
+const cyrb53 = function(str, seed = 0) {
+    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+    for (let i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1>>>16), 2246822507) ^ Math.imul(h2 ^ (h2>>>13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
+    return 4294967296 * (2097151 & h2) + (h1>>>0);
+};
 
 
 class TypewritersMax {
@@ -143,7 +164,7 @@ class CommonTypewriter {
 }
 
 
-
+let _isClickPossible = true;
 const chatboxModule = new TypewritersMax()
 let _timer = new Date().getTime();
 let animate = () => {
@@ -156,7 +177,7 @@ let animate = () => {
     window.requestAnimationFrame(animate)
 }
 animate();
-chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "Hello this is test", 100)
+
 
     </script>
   </body>
