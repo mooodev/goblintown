@@ -9,19 +9,20 @@
         color:#008106;
         background-color:#1f1f1f;
       }
-      >mainHolder{
+      .mainHolder{
         overflow:scroll;
       }
     </style>
   </head>
   <body>
     <button type="button" onclick="testingMainButton()" name="button">test</button>
-    <div class="mainHolder">
+
       <h1 id="mainHeaderPanel">wlcome</h1>
+      <div class="mainHolder">
       <p id="mainInfoPanel">All game action data goes here..</p>
     </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
     <script type="text/javascript">
       console.log("Hello world")
@@ -61,33 +62,93 @@ window.addEventListener('load', (event) => {
 });
 
 
+
+class Miner{
+  constructor(){
+    this.speed = 1000;
+    //startup miner
+    this.timer = 1000;
+    this.powered = false;
+    this.nonce = 0;
+    this.currentString = '';
+    this.userId = 'user';
+  }
+  powerOn(){
+    this.powered = true;
+    this.nonce = 0;
+  }
+  powerOff(){
+    this.powered = false;
+  }
+  mineLoop(delta){
+    if(this.powered){
+      this.timer -= delta;
+      if(this.timer < 0){
+        this.timer = this.speed;
+        this.hashingProcess()
+      }
+    }
+  }
+  hashingProcess(){
+    let _nonceString = this.currentString.toString() + this.nonce + this.userId.toString();
+    this.nonce++;
+    let hash;
+    hash = CryptoJS.SHA256(_nonceString.toString());
+    hash = hash.toString(CryptoJS.enc.Hex)
+    addNewTypeInfoParagraph(hash)
+    if(world.checkForReward(hash)){
+      //mined a block event!
+      addNewTypeInfoParagraph("REWARD RECIVED ---->")
+      this.powerOff()
+    }
+  }
+}
+
+
+class World{
+  constructor(){
+    this.difficulty = 1;
+  }
+  checkForReward(hash){
+let difficultyJackpot = 0;
+for(let n = 0; n < this.difficulty ; n++){
+  if(Number(hash.charAt(n)) == n){
+    difficultyJackpot++;
+  }
+}
+    if(difficultyJackpot == this.difficulty){
+      //solved! Recive reward please
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
+
+
+let addNewTypeInfoParagraph = (text) => {
+  let newElement = document.createElement("p");
+  document.getElementById("mainInfoPanel").appendChild(newElement)
+  chatboxModule.addTypewriter(newElement,text, 15)
+}
+
+
+const world = new World();
+const myNewMiner = new Miner();
+myNewMiner.speed = 5000;
+
+
+
 var testingMainButton = () => {
-  if(_isClickPossible){
-    _isClickPossible = false;
+  if(!myNewMiner.powered){
     chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "///Hacking in action!", 10)
-    let string = Math.random();
-    let _hashedString = "0x_" + string + "hashed.."
-    let newElement = document.createElement("p");
-    document.getElementById("mainInfoPanel").appendChild(newElement)
-    chatboxModule.addTypewriter(newElement, _hashedString, 50)
+    myNewMiner.powerOn();
     tg.MainButton.setText("Typing...") //  метод для задания текста
-    setTimeout(() => {
-      myTimer();
-    }, "1000")
   }else{
     console.log("not yet ready")
   }
-
-
 }
 
-
-function myTimer() {
-  chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "..snackby/standby mode", 10)
-  console.log("Waited!")
-  tg.MainButton.setText('Its Hack-time!') //  метод для задания текста
-  _isClickPossible = true;
-}
 
 
 
@@ -168,7 +229,7 @@ let animate = () => {
     //console.log("delta equal " + _delta)
     //TYPEWRITERS AND CHATS
     chatboxModule.executeTypingAcrossAllArrays(_delta)
-
+    myNewMiner.mineLoop(_delta)
     window.requestAnimationFrame(animate)
 }
 animate();
