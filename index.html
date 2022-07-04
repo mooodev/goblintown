@@ -10,13 +10,14 @@
     }
   </style>
   <body>
-    <p id="testAlert">Testonmg</p>
-    <img hidden id="tilesetPlayers" src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/01%20-%20Full%20spritesheet%20(16x24).png" alt="">
+    <!-- <img hidden id="tilesetPlayers" src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/01%20-%20Full%20spritesheet%20(16x24).png" alt=""> -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
       <script type="text/javascript">
         console.log("Hello world")
+let tg = window.Telegram.WebApp;
+
 
 
 
@@ -105,8 +106,8 @@
               //
               //
               //
-              let playerTexture = document.getElementById("tilesetPlayers")
-              let _texPlayers = new THREE.TextureLoader().load(playerTexture);
+            //  let playerTexture = document.getElementById("tilesetPlayers")
+            //  let _texPlayers = new THREE.TextureLoader().load(playerTexture);
               //  let testannie = new TextureAnimator(_texP, 4, 4, 2, 3, 175);
                const geometryP = new THREE.PlaneGeometry(1, 1.5);
                const materialP = new THREE.MeshBasicMaterial({
@@ -121,54 +122,6 @@
                player.position.z = 0.05;
 
 
-        document.addEventListener('touchstart', handleTouchStart, false);        
-document.addEventListener('touchmove', handleTouchMove, false);
-
-var xDown = null;                                                        
-var yDown = null;
-
-function getTouches(evt) {
-  return evt.touches ||             // browser API
-         evt.originalEvent.touches; // jQuery
-}                                                     
-                                                                         
-function handleTouchStart(evt) {
-    const firstTouch = getTouches(evt)[0];                                      
-    xDown = firstTouch.clientX;                                      
-    yDown = firstTouch.clientY;                                      
-};                                                
-                                                                         
-function handleTouchMove(evt) {
-    if ( ! xDown || ! yDown ) {
-        return;
-    }
-
-    var xUp = evt.touches[0].clientX;                                    
-    var yUp = evt.touches[0].clientY;
-
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
-                                                                         
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-        if ( xDiff > 0 ) {
-           document.getElementById("testAlert").innerText = "RIGHT"
-        } else {
-            /* left swipe */
-          document.getElementById("testAlert").innerText = "LEFT"
-        }                       
-    } else {
-        if ( yDiff > 0 ) {
-            /* down swipe */ 
-          document.getElementById("testAlert").innerText = "DOWT"
-        } else { 
-            /* up swipe */
-          document.getElementById("testAlert").innerText = "UPZ"
-        }                                                                 
-    }
-    /* reset values */
-    xDown = null;
-    yDown = null;                                             
-};
 
 
               var clock = new THREE.Clock();
@@ -179,8 +132,75 @@ function handleTouchMove(evt) {
                 renderer.render( scene, camera );
               };
               animate();
-        window.scrollTo(0,0)
 
+
+
+
+
+
+
+//               document.addEventListener('touchstart', handleTouchStart, false);
+// document.addEventListener('touchmove', handleTouchMove, false);
+//
+// var xDown = null;
+// var yDown = null;
+//
+// function getTouches(evt) {
+//   return evt.touches ||             // browser API
+//          evt.originalEvent.touches; // jQuery
+// }
+//
+// function handleTouchStart(evt) {
+//     const firstTouch = getTouches(evt)[0];
+//     xDown = firstTouch.clientX;
+//     yDown = firstTouch.clientY;
+// };
+//
+// function handleTouchMove(evt) {
+//     if ( ! xDown || ! yDown ) {
+//         return;
+//     }
+//
+//     var xUp = evt.touches[0].clientX;
+//     var yUp = evt.touches[0].clientY;
+//
+//     var xDiff = xDown - xUp;
+//     var yDiff = yDown - yUp;
+//
+//     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+//         if ( xDiff > 0 ) {
+//             /* right swipe */
+//         } else {
+//             /* left swipe */
+//         }
+//     } else {
+//         if ( yDiff > 0 ) {
+//             /* down swipe */
+//         } else {
+//             /* up swipe */
+//         }
+//     }
+//     /* reset values */
+//     xDown = null;
+//     yDown = null;
+// };
+
+
+//g.initData //получаем данные от пользователя в виде строки (работает только при запуске из меню команд бота).
+//tg.initDataUnsafe // получаем данные от пользователя в виде объекта (работает только при запуске из меню команд бота).
+ // возвращает true, если приложение открыто на всю высоту, false - если нет.
+console.log(tg.viewportHeight) // вернёт ширину окна.
+//tg.sendData("Hello") // отправляет данные  боту в строковом виде, после чего закрывает приложение (работает только если приложение запущено с keyboard button).
+
+
+window.addEventListener('load', (event) => {
+  console.log('page is fully loaded');
+  console.log(tg.ready(),tg.isExpanded) // метод позволяет отследить, когда приложение готово к отображению.
+  if(!tg.isExpanded)tg.expand()
+  tg.expand()// метод позволяет растянуть окно на всю высоту.
+});
+
+// tg.close() // метод закрывает приложение.
       </script>
   </body>
 </html>
