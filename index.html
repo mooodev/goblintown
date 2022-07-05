@@ -264,6 +264,12 @@ body {
 	 overflow: scroll;
 }
 
+.win.gray-theme p{
+	line-height: 30%;
+}
+.win.blue-theme p{
+	line-height: 70%;
+}
 	</style>
 </head>
 
@@ -302,9 +308,11 @@ body {
     <div>
 			  <p class="content-center"><strong id="mainHeaderPanel">Connected</strong></p>
       <!-- <p class="content-center"><strong>Balance</strong></p> -->
-			<img src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/networklogo.png" alt="">
-			<img src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/stats.png" alt="">
-      <p>This account is empty , fill it up from from MS-DOS shell Noton Commander.</p>
+			<!-- <img src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/networklogo.png" alt="">
+			<img src="https://raw.githubusercontent.com/mooodev/goblintown/main/images/stats.png" alt=""> -->
+      <p>Connected nodes: 1</p>
+			  <p>Network difficulty: 1</p>
+				  <p>Balance: 0</p>
     </div>
   </div>
 
@@ -341,13 +349,13 @@ let tg = window.Telegram.WebApp;
 console.log(tg.viewportHeight) // вернёт ширину окна.
 //tg.sendData("Hello") // отправляет данные  боту в строковом виде, после чего закрывает приложение (работает только если приложение запущено с keyboard button).
 
-
+let tgUser = 'user'
 window.addEventListener('load', (event) => {
 console.log('page is fully loaded');
-
-
-
-_isClickPossible = true;
+if(tg.initDataUnsafe.user !== undefined){
+tgUser = tg.initDataUnsafe.user.first_name
+}
+chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "Welcome " + tgUser , 60)
 tg.expand()
 // tg.close() // метод закрывает приложение.
 
@@ -376,6 +384,10 @@ if(tg.viewportHeight !== undefined){
 }
 _el.style.maxHeight = Number(_temlEl)+"px"
 _el.style.maxWidth = Number(_temhEl)+"px"
+
+
+let tempData = tg.initData
+chatboxModule.addTypewriter(document.getElementById("mainHeaderPanel"), "Welcome " + tempData , 60)
 });
 
 
@@ -442,6 +454,7 @@ if(Number(hash.charAt(n)) == n){
 	if(difficultyJackpot == this.difficulty){
 		//solved! Recive reward please
 		this.currentSituation = Math.random()
+		tg.sendData("some string that we need to send");
 		return true;
 	}else{
 		return false;
@@ -456,10 +469,7 @@ if(text == "REWARD RECIVED ---->"){
 	newElement.style.color = "yellow"
 }
 document.getElementById("mainInfoPanel").prepend(newElement)
-if(checkOverflow(newElement)){
-	console.log(checkOverflow(newElement))
-	addNewTypeInfoParagraph("overflowin")
-}
+
 chatboxModule.addTypewriter(newElement,text, 15)
 }
 
@@ -562,28 +572,6 @@ let animate = () => {
 	window.requestAnimationFrame(animate)
 }
 animate();
-
-
-
-// Determines if the passed element is overflowing its bounds,
-// either vertically or horizontally.
-// Will temporarily modify the "overflow" style to detect this
-// if necessary.
-function checkOverflow(el)
-{
-   var curOverflow = el.style.overflow;
-
-   if ( !curOverflow || curOverflow === "visible" )
-      el.style.overflow = "hidden";
-
-   var isOverflowing = el.clientWidth < el.scrollWidth
-      || el.clientHeight < el.scrollHeight;
-
-   el.style.overflow = curOverflow;
-
-   return isOverflowing;
-}
-
 
 	</script>
 
