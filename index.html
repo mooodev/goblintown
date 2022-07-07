@@ -11,7 +11,7 @@
   <script type="text/javascript">
 
   //network
-    const socket = io('http://85.249.39.167:3000');
+    const socket = io('https://85.249.39.167:3000');
     let send2Server = () => {
         console.log("sending local ask to server")
         socket.emit('hello', "hello from client")
