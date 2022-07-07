@@ -10,12 +10,12 @@
   <script type="text/javascript">
 
     function reqListener () {
-      console.log(this.responseText);
+      console.log("connected")
     }
 
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", reqListener);
-    oReq.open("GET", "85.249.39.167:8080");
+    oReq.open("GET", "ws://85.249.39.167:8080");
     oReq.send();
 
   </script>
