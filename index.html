@@ -6,17 +6,20 @@
   </head>
   <body>
     Hello world
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.5.0/socket.io.min.js"></script>
   </body>
   <script type="text/javascript">
 
-    function reqListener () {
-      console.log("connected")
+  //network
+    const socket = io('http://85.249.39.167:3000');
+    let send2Server = () => {
+        console.log("sending local ask to server")
+        socket.emit('hello', "hello from client")
     }
 
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", reqListener);
-    oReq.open("GET", "ws://85.249.39.167:8080");
-    oReq.send();
+    socket.on('test', e => {
+        console.log("recived message from client " + e)
+    })
 
   </script>
 </html>
