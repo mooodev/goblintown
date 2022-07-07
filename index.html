@@ -7,19 +7,50 @@
   <body>
     Hello world
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.5.0/socket.io.min.js"></script>
+    <button type="button" onclick="sendMessage()" name="button">Sned Message</button>
   </body>
   <script type="text/javascript">
 
   //network
-    const socket = io('https://85.249.39.167:3000');
-    let send2Server = () => {
-        console.log("sending local ask to server")
-        socket.emit('hello', "hello from client")
-    }
+    // const socket = io('http://85.249.39.167:3000');
+    // let send2Server = () => {
+    //     console.log("sending local ask to server")
+    //     socket.emit('hello', "hello from client")
+    // }
+    //
+    // socket.on('test', e => {
+    //     console.log("recived message from client " + e)
+    // })
+    const socket = new WebSocket("ws://85.249.39.167:3333");
 
-    socket.on('test', e => {
-        console.log("recived message from client " + e)
-    })
+
+
+var sendMessage = (message) => {
+  socket.send(JSON.stringify({
+    type: "hello from client",
+    content: [ 3, "4" ]
+  }));
+}
+//
+// socket.addEventListener("open", () => {
+//   // send a message to the server
+//   socket.send(JSON.stringify({
+//     type: "hello from client",
+//     content: [ 3, "4" ]
+//   }));
+// });
+
+// receive a message from the server
+socket.addEventListener("message", ({ data }) => {
+  console.log("recived data from server",data)
+  const packet = JSON.parse(data);
+
+  switch (packet.type) {
+    case "hello from server":
+      // ...
+      break;
+  }
+});
 
   </script>
 </html>
